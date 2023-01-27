@@ -14,8 +14,9 @@ const campsiteSlice = createSlice({
 export const campsiteSliceReducer=campsiteSlice.reducer
 
 
-export const SelectAllCampsites = () => {
-   return CAMPSITES;
+export const SelectAllCampsites = (state) => {
+   console.log(state);
+   return state.campsites.campsitesArray;
 };
 
 

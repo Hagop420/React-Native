@@ -5,3 +5,5 @@ export const store = configureStore({
     counter: campsiteSliceReducer,
   },
 });
+
+// console.log(store.getState());
