@@ -6,19 +6,41 @@ import CampsiteInfoScreen from './CampsiteInfoScreen';
 import DirectoryScreen from './DirectoryScreen';
 import {createStackNavigator } from '@react-navigation/stack';
 import {StackActions } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import HomeScreen from './HomeScreen';
+
+
+const Drawer=createDrawerNavigator()
+
+const screenOptions = {
+   backgroundColor: '#333',
+   headerStyle: {backgroundColor:'5637DD'}
+}
+
+
+const HomeNavigator = () => {
+   const Stack=createStackNavigator()
+
+   return (
+      <Stack.Navigator
+      screenOptions={screenOptions}>
+             <Stack.Screen
+            name='Home'
+            component={HomeScreen}
+            options={{title:'Home'}}
+         />
+      </Stack.Navigator>
+   )
+}
+
+
 
 const DirectoryNavigator = () => {
    const Stack = createStackNavigator();
    return (
       <Stack.Navigator
          initialRouteName='Directory'
-         screenOptions={{
-            headerStyle: {
-               backgroundColor: '#333'
-            },
-            headerTintColor: '#fff',
-
-         }}
+         screenOptions={screenOptions}
          
       >
          <Stack.Screen
@@ -54,7 +76,25 @@ const Main = () => {
 
          }}
          >
-            <DirectoryNavigator/>
+            <Drawer.Navigator
+              initialRouteName='Home'
+              drawerStyle={{backgroundColor:'#ccc'}}>
+
+               <Drawer.Screen
+                  name='Home'
+                  component={HomeNavigator}
+               options={{title:'🏠'}}>
+
+               </Drawer.Screen>
+
+
+               <Drawer.Screen
+                  name='Directory'
+                  component={DirectoryNavigator}
+               options={{title:'Directory'}}>
+
+               </Drawer.Screen>
+            </Drawer.Navigator>
          </View>
          
 
