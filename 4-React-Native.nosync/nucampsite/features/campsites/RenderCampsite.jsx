@@ -1,7 +1,6 @@
 import { Text, View } from "react-native";
 import { Card } from "react-native-elements";
 
-
 const RenderCampsite = ({campsite}) => {
    if (campsite) {
       return (
@@ -19,7 +18,7 @@ const RenderCampsite = ({campsite}) => {
                  </Text>
                </View>
             </Card.Image>
-            <Text style={{ margin: 20 }}>{ campsite.description}</Text>
+            <Text style={{ margin: 20,textAlign:'center' }}>{ campsite.description}</Text>
         </Card>
       )
       return <View/>
