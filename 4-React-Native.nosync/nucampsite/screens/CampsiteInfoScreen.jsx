@@ -7,3 +7,7 @@ const CampsiteInfoScreen = ({route}) => {
 
 
 export default CampsiteInfoScreen
+
+
+
+// show the actual images and the nav image and text 

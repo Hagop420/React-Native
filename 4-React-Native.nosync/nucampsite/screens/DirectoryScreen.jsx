@@ -35,3 +35,8 @@ const DirectoryScreen = ({navigation}) => {
 }
 
 export default DirectoryScreen
+
+
+
+
+// nav when clicked open discrebtion page
