@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Platform,View } from 'react-native';
-import { Constants } from 'expo-constants';
+import  Constants from 'expo-constants';
 import CampsiteInfoScreen from './CampsiteInfoScreen';
 // import { CAMPSITES } from '../shared/campsites'
 import DirectoryScreen from './DirectoryScreen';
@@ -47,7 +47,7 @@ const Main = () => {
    return (
       <>
          <View style={{
-            flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
+            flex: 1, paddingTop: Platform.OS === 'ios' ? 0 :  Constants.statusBarHeight
 
 
 
