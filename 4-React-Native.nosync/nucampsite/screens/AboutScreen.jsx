@@ -42,9 +42,10 @@ const AboutScreen = () => {
             {PARTNERS.map(partner => {
                return (
                   <>
-                     <ListItem key={partner.id }>
-                        <Avatar source={partner.image} rounded/>
-                     </ListItem>
+                     <ListItem>
+                        <Avatar key={partner.id} source={partner.image} rounded/>
+                     {/* </ListItem> */}
+                        
                      <ListItem.Content>
                         <View>
                         <ListItem.Title>
@@ -60,6 +61,7 @@ const AboutScreen = () => {
                         </ListItem.Subtitle>
                         </View>
                      </ListItem.Content>
+                     </ListItem>
                   </>
                )
             })}

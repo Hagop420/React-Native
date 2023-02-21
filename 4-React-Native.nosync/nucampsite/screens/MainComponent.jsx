@@ -124,30 +124,30 @@ const Main = () => {
                <Drawer.Screen
                   name='Home'
                   component={HomeNavigator}
-               options={{title:'🏠'}}>
+               options={{title:'🏠'}}/>
 
-               </Drawer.Screen>
+               
 
 
                <Drawer.Screen
                   name='Directory'
                   component={DirectoryNavigator}
-               options={{title:'Directory'}}>
+               options={{title:'Directory'}}/>
 
-               </Drawer.Screen>
+               
 
                <Drawer.Screen
                   name='About'
                   component={AboutNavigator}
-               >
+              />
 
-               </Drawer.Screen>
+               
                <Drawer.Screen
                   name='Contact'
                   component={ContactNavigator}
-               options={{title:'Contact'}}>
+               options={{title:'Contact'}}/>
 
-               </Drawer.Screen>
+               
             </Drawer.Navigator>
          </View>
          
