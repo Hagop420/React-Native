@@ -18,7 +18,7 @@ import { useEffect } from 'react';
 import { fetchPartners } from '../features/partners/partnersSlice';
 import { fetchCampsites } from '../features/campsites/campsitesSlice';
 import { fetchPromotions } from '../features/promotions/promotionsSlice';
-import { fetchComments } from '../features/campsites/comments/commentsSlice';
+import { fetchComments } from '../features/comments/commentsSlice';
 
 
 
@@ -149,7 +149,7 @@ const CustomDrawerContent = (props) => (
 
 const Main = () => {
     
-    const dispatch=useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchCampsites())

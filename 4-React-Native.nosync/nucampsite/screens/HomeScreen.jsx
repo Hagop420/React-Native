@@ -1,14 +1,14 @@
 import { ScrollView, Text, View } from 'react-native';
 import {Card} from 'react-native-elements' 
 import { useSelector } from 'react-redux';
-import { baseURL } from '../shared/baseUrl';
+import { baseUrl } from '../shared/baseUrl';
 
 
 const FeaturedItem = ({ item }) => {
    if (item) {
       return (
          <Card containerStyle={{ padding: 0 }}>
-            <Card.Image source={{uri: baseURL + item.image}}>
+            <Card.Image source={{uri: baseUrl + item.image}}>
                <View style={{ justifyContent: 'center', flex: 1 }}>
                   <Text style={{
                      color: '#fff',
@@ -33,13 +33,16 @@ const FeaturedItem = ({ item }) => {
          </Card>
       )
    }
-   return <View/>
+   return <View />
 }
 
 const HomeScreen = () => {
 const campsites=useSelector((state) =>state.campsites)
 const promotions=useSelector((state) =>state.promotions)
 const partners=useSelector((state) =>state.partners)
+console.log(campsites);
+console.log(promotions);
+console.log(partners);
 
 // find
 
@@ -47,11 +50,14 @@ const partners=useSelector((state) =>state.partners)
    const featPartners = partners.partnersArray.find((part) => part.featured)
    const featPromotions = promotions.promotionsArray.find((promo) => promo.featured)
 
+
    return (
       <ScrollView>
-      <FeaturedItem item={featCampsite} />
-      <FeaturedItem item={featPartners} />
-      <FeaturedItem item={featPromotions} />
+  
+            <FeaturedItem item={featCampsite} />
+            <FeaturedItem item={featPartners} />
+            <FeaturedItem item={featPromotions} />
+         
       </ScrollView>
    )
 }
