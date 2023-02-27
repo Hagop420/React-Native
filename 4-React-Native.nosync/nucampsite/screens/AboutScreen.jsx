@@ -4,6 +4,7 @@ import { ScrollView } from "react-native-gesture-handler"
 // import { PARTNERS } from "../shared/partners"
 import { useSelector } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
+import Loading from '../components/LoadingComponent'
 
 
 const Mission = () => {
@@ -22,6 +23,63 @@ const Mission = () => {
 
 const AboutScreen = () => {
    const partners=useSelector((state) => state.partners)
+
+   if (partners.isLoading) {
+      return (
+         <ScrollView>
+            <Mission />
+   
+            <Card>
+   
+               <Card.Title>
+                  <Text>
+                     Community Partners
+                  </Text>
+                  
+                  <Card.Divider>
+                     <Loading/>
+                  </Card.Divider>
+                  
+               </Card.Title>
+   
+   
+              
+            
+            </Card>
+         </ScrollView>
+      )
+   }
+
+   if (partners.errMess) {
+      return (
+         <ScrollView>
+            <Mission />
+   
+            <Card>
+   
+               <Card.Title>
+                  <Text>
+                     Community Partners
+                  </Text>
+                  
+                  <Card.Divider>
+                     <Text>{partners.errMess}</Text>
+                  </Card.Divider>
+                  
+               </Card.Title>
+   
+   
+              
+            
+            </Card>
+         </ScrollView>
+      )
+   }
+
+
+
+
+
    return (
       <ScrollView>
          <Mission />
