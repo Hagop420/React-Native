@@ -7,7 +7,7 @@ const Loading = () => {
          <View style={styles.loadingView}>
             <ActivityIndicator size='large' color='blue'>
                <Text style={styles.loadingText}>
-                  Loading...
+               
                </Text>
             </ActivityIndicator>
          </View>
@@ -21,11 +21,13 @@ const styles = StyleSheet.create({
    loadingView: {
        alignItems: 'center',
        justifyContent: 'center',
+       margin:30,
        flex: 1
    },
    loadingText: {
-       color: 'blue',
-       fontSize: 14,
+      color: 'blue',
+      fontSize: 32,
+       display:'block',
        fontWeight: 'bold'
    }
 });
