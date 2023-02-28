@@ -114,8 +114,11 @@ const ReservationScreen = () => {
             />
          </View>
          <Modal
-            animationType="none"
-         />
+            animationType="slide"
+            transparent={false}
+            visible={showModal}
+            onRequestClose={() => setShowModal(!showModal)}
+          />
         
       </ScrollView>
    )
