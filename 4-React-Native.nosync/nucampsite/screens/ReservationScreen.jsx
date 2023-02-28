@@ -121,7 +121,12 @@ const ReservationScreen = () => {
          />
          
          <View style={styles.modal} >
-            <Text></Text>
+            <Text style={styles.modalTitle}>
+               Search Reservations
+            </Text>
+            <Text style={styles.modalTitle}>
+               Search Reservations
+            </Text>
          </View>
         
       </ScrollView>
