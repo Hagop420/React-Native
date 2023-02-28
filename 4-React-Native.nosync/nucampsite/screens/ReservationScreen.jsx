@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
    Text,
    View, ScrollView,
-   Stylesheet,
+   StyleSheet,
    Switch,
    Button
 } from 'react-native';
