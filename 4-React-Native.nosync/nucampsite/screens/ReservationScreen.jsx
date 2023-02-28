@@ -90,6 +90,7 @@ const ReservationScreen = () => {
                         true: 'blue', false: null
                      }}
                      onValueChange={(value) => setHikeIn(value)} />
+                  </Text>
             </View>
 
             <View style={styles.formRow}>
