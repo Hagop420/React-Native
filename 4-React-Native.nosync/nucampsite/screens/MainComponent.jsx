@@ -267,21 +267,21 @@ const Main = () => {
 
                 {/* reservation screen drawer screen */}
                 <Drawer.Screen
-                    name='Reservation'
-                    component={ResNavigator}
-                    options={{
-                        title: 'Reserve a spot',
-                        drawerIcon: ({ color }) => (
-                            <Icon
-                                name='tree'
-                                type='font-awesome'
-                                size={24}
-                                iconStyle={{ width: 24 }}
-                                color={color}
-                            />
-                        )
-                    }}
-                />
+    name='ReserveCampsite'
+    component={ResNavigator}
+    options={{
+        title: 'Reserve Campsite',
+        drawerIcon: ({ color }) => (
+            <Icon
+                name='tree'
+                type='font-awesome'
+                size={24}
+                iconStyle={{ width: 24 }}
+                color={color}
+            />
+        )
+    }}
+/>
                 {/* end reservation navigar drawer */}
             </Drawer.Navigator>
         </View>
