@@ -128,7 +128,7 @@ const ReservationScreen = () => {
                Numebr of campers picked: {campers}
             </Text>
             <Text style={styles.modalText}>
-               Search Reservations
+               hike in pick: {hikeIn}
             </Text>
             <Text style={styles.modalText}>
                Search Reservations
