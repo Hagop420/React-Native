@@ -124,7 +124,13 @@ const ReservationScreen = () => {
             <Text style={styles.modalTitle}>
                Search Reservations
             </Text>
-            <Text style={styles.modalTitle}>
+            <Text style={styles.modalText}>
+               Numebr of campers picked: {campers}
+            </Text>
+            <Text style={styles.modalText}>
+               Search Reservations
+            </Text>
+            <Text style={styles.modalText}>
                Search Reservations
             </Text>
          </View>
