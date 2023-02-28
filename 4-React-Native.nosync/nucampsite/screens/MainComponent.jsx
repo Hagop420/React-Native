@@ -104,6 +104,28 @@ const ContactNavigator = () => {
 // Reservation navigator
 
 
+const ResNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='Reservation'
+                component={ReservationScreen}
+                options={({ navigation }) => ({
+                    title: 'Make a Reservation',
+                    headerLeft: () => (
+                        <Icon
+                            name='tree'
+                            type='font-awesome'
+                            iconStyle={styles.stackIcon}
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    )
+                })}
+            />
+        </Stack.Navigator>
+    );
+};
 
 const DirectoryNavigator = () => {
     const Stack = createStackNavigator();
@@ -240,6 +262,10 @@ const Main = () => {
                         )
                     }}
                 />
+
+
+
+                {/* reservation screen drawer screen */}
             </Drawer.Navigator>
         </View>
     );
