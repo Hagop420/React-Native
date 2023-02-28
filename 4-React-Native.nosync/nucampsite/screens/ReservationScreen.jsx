@@ -36,6 +36,7 @@ const ReservationScreen = () => {
          <View style={styles.formRow}>
             <Text style={styles.formLabel}>
                Number of Campers:
+            </Text>
 
                <Picker
                   style={styles.formItem}
@@ -67,7 +68,7 @@ const ReservationScreen = () => {
                      value={6}
                   />
                </Picker>
-            </Text>
+            
          </View>
 
          <View style={styles.formRow}>
