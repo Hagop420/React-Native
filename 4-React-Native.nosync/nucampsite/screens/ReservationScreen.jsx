@@ -118,7 +118,9 @@ const ReservationScreen = () => {
             transparent={false}
             visible={showModal}
             onRequestClose={() => setShowModal(!showModal)}
-          />
+         />
+         
+         <View />
         
       </ScrollView>
    )
