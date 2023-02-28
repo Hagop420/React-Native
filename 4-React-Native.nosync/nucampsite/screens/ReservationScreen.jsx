@@ -43,30 +43,12 @@ const ReservationScreen = () => {
                   selectedValue={campers}
                   onValueChange={(item) => setCampers(item)}
                >
-                  <Picker.Item
-                     label="1" 
-                     value={1}
-                  />
-                  <Picker.Item
-                     label="2" 
-                     value={2}
-                  />
-                  <Picker.Item
-                     label="3" 
-                     value={3}
-                  />
-                  <Picker.Item
-                     label="4" 
-                     value={4}
-                  />
-                  <Picker.Item
-                     label="5" 
-                     value={5}
-                  />
-                  <Picker.Item
-                     label="6" 
-                     value={6}
-                  />
+               <Picker.Item label="1" value={1} />
+               <Picker.Item label="2" value={2} />
+               <Picker.Item label="3" value={3} />
+               <Picker.Item label="4" value={4} />
+               <Picker.Item label="5" value={5} />
+               <Picker.Item label="6" value={6} />
                </Picker>
             
          </View>
@@ -74,13 +56,14 @@ const ReservationScreen = () => {
          <View style={styles.formRow}>
             <Text style={styles.formLabel}>
                Hike in?
+               </Text>
                <Switch
                   style={styles.formItem}
                   value={hikeIn}
                   trackColor={{ true: 'blue', false: null }}
                   onValueChange={(value) => setHikeIn(value)}
                />
-            </Text>
+           
          </View>
 
          <View style={styles.formRow}>
