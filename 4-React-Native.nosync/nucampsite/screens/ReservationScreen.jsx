@@ -29,7 +29,7 @@ const ReservationScreen = () => {
       console.log('campers:' , campers);
       console.log('hikeIn:' , hikeIn);
       console.log('date:' , date);
-    setShowModal(!showModal)
+      setShowModal(!showModal)
    }
 
    const reset = () => {
@@ -114,32 +114,45 @@ const ReservationScreen = () => {
             />
          </View>
          <Modal
-            animationType="slide"
+            animationType='fade'
             transparent={false}
             visible={showModal}
             onRequestClose={() => setShowModal(!showModal)}
-         />
-         
+>
+            <View
+               style=
+               {{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flex: 1,
+                  textAlign:'center',
+                  flexDirection: 'column',
+                  margin: 20}}>
          <View style={styles.modal} >
             <Text style={styles.modalTitle}>
                Search Reservations
             </Text>
             <Text style={styles.modalText}>
-               Numebr of campers picked: {campers}
+               Numebr of campers selected: {campers}
             </Text>
             <Text style={styles.modalText}>
-               hike in pick: {hikeIn ? 'Yes' : 'No'}
+               hike in picked: {hikeIn ? 'Yes' : 'No'}
             </Text>
             <Text style={styles.modalText}>
                Date: {date.toLocaleDateString('en-US')}
-            </Text>
+                  </Text>
+                  </View>
 
             <Button
                onPress={() => {
                   setShowModal(!showModal)
                   reset()
-            }}/>
-         </View>
+               }}
+               color='blue'
+               title="Close"/>
+            
+            </View>
+            </Modal>
         
       </ScrollView>
    )
