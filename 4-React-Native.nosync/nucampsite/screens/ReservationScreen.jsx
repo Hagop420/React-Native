@@ -133,6 +133,12 @@ const ReservationScreen = () => {
             <Text style={styles.modalText}>
                Date: {date.toLocaleDateString('en-US')}
             </Text>
+
+            <Button
+               onPress={() => {
+                  setShowModal(!showModal)
+                  reset()
+            }}/>
          </View>
         
       </ScrollView>
