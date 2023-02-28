@@ -83,7 +83,7 @@ const ReservationScreen = () => {
 
          {showCal && (
             <DateTimePicker
-               style={styles.formItem}
+               style={styles.datePick}
                value={date}
                mode='date'
                display='default'
