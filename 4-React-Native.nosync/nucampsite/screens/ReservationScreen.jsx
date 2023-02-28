@@ -120,7 +120,9 @@ const ReservationScreen = () => {
             onRequestClose={() => setShowModal(!showModal)}
          />
          
-         <View />
+         <View style={styles.modal} >
+            <Text></Text>
+         </View>
         
       </ScrollView>
    )
