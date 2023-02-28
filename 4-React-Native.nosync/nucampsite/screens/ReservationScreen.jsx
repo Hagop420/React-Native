@@ -5,7 +5,8 @@ import {
    ScrollView,
    StyleSheet,
    Switch,
-   Button
+   Button,
+   Platform
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -18,7 +19,8 @@ const ReservationScreen = () => {
 
    const onDateChange = (event, selectedDate) => {
       const currentDate = selectedDate || date
-      setShowCal(currentDate)
+      setShowCal(Platform.OS === 'ios')
+      setDate(currentDate)
    }
 
    const handleRes = () => {
@@ -66,7 +68,8 @@ const ReservationScreen = () => {
            
          </View>
 
-         <View style={styles.formRow}>
+
+          <View style={styles.formRow}>
             <Text style={styles.formLabel}>
                Date:
             </Text>
@@ -88,13 +91,20 @@ const ReservationScreen = () => {
             />
          )}
 
-         <View style={styles.formRow}>
+         <View
+            style={{
+               alignItems: 'center',
+            justifyContent: 'center',
+               flex: 1,
+               flexDirection: 'row',
+               borderRadius:20,
+               backgroundColor:'blue',
+               margin: 20}}>
             <Button
                onPress={() => handleRes()}
                title='Search'
-               style={{ backgroundColor: 'blue' }}
-               color='blue'
-               accessibilityLabel="Blindness accesibillity Features"
+               color='#fff'
+               accessibilityLabel="Tap me to select a reservation date'"
             />
          </View>
       </ScrollView>
