@@ -14,6 +14,11 @@ const ReservationScreen = () => {
    const [hikeIn, setHikeIn] = useState(false);
    const [date, setDate] = useState(new Date());
    const [showCal, setShowCal] = useState(false)
+
+   const onDateChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date
+      setShowCal(currentDate)
+   }
 // event handler
    const handleRes = () => {
       console.log('campers' , campers);
@@ -101,11 +106,18 @@ const ReservationScreen = () => {
                <DateTimePicker
                   style={styles.formItem}
                   value={date}
-                  
+                  mode='date'
                   display='default'
                   onChange={onDateChange}
                />
-                     )}
+            )}
+            
+            <View style={formRow}>
+               <Button onPress={() => handleRes()}
+                  title='Search'
+                  color='blue'
+               accessibilityLabel="Blindness accesibillity Features"/>
+            </View>
          </ScrollView>
       )
    }
