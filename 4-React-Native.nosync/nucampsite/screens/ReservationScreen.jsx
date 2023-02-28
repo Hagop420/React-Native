@@ -128,10 +128,10 @@ const ReservationScreen = () => {
                Numebr of campers picked: {campers}
             </Text>
             <Text style={styles.modalText}>
-               hike in pick: {hikeIn}
+               hike in pick: {hikeIn ? 'Yes' : 'No'}
             </Text>
             <Text style={styles.modalText}>
-               Search Reservations
+               Date: {date.toLocaleDateString('en-US')}
             </Text>
          </View>
         
