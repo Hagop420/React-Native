@@ -91,7 +91,21 @@ const ReservationScreen = () => {
                <Text style={styles.formLabel}>
                   Date:
                </Text>
+               <Button onPress={() => setShowCal(!showCal)}
+                  title={date.toLocaleDateString('en-US')}
+                  color='blue'
+               accessibilityLabel="Tap on me to select a Resetrvation date"/>
             </View>
+
+            {showCal && (
+               <DateTimePicker
+                  style={styles.formItem}
+                  value={date}
+                  
+                  display='default'
+                  onChange={onDateChange}
+               />
+                     )}
          </ScrollView>
       )
    }
