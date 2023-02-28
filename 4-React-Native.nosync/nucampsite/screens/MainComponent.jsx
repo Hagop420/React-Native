@@ -266,6 +266,8 @@ const Main = () => {
 
 
                 {/* reservation screen drawer screen */}
+
+                {/* end reservation navigar drawer */}
             </Drawer.Navigator>
         </View>
     );
