@@ -6,6 +6,7 @@ import {
    StyleSheet,
    Switch,
    Button,
+   Modal,
    Platform
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -16,6 +17,7 @@ const ReservationScreen = () => {
    const [hikeIn, setHikeIn] = useState(false);
    const [date, setDate] = useState(new Date());
    const [showCal, setShowCal] = useState(false)
+   const [showModal, setShowModal] = useState(false)
 
    const onDateChange = (event, selectedDate) => {
       const currentDate = selectedDate || date
@@ -27,6 +29,10 @@ const ReservationScreen = () => {
       console.log('campers:' , campers);
       console.log('hikeIn:' , hikeIn);
       console.log('date:' , date);
+    setShowModal(!showModal)
+   }
+
+   const reset = () => {
       setCampers(1)
       setHikeIn(false)
       setDate(new Date())
@@ -107,6 +113,10 @@ const ReservationScreen = () => {
                accessibilityLabel="Tap me to select a reservation date'"
             />
          </View>
+         <Modal
+            animationType="none"
+         />
+        
       </ScrollView>
    )
 }
@@ -125,7 +135,23 @@ const styles = StyleSheet.create({
    },
    formItem: {
       flex: 1
-   }
+   },
+   modal: {
+      justifyContent: 'center',
+      margin: 20,
+   },
+   modalTitle: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      backgroundColor: 'blue',
+      textAlign: 'center',
+      marginBottom: 20,
+      color:'#fff',
+   },
+   modalText: {
+      fontSize: 18,
+      margin: 10
+  }
 });
 
 export default ReservationScreen
