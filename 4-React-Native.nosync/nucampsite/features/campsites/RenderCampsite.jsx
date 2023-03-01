@@ -31,7 +31,14 @@ const RenderCampsite = (props) => {
             />
 
             {/* pencil icon add */}
-
+            <Icon
+               name='pencil'
+               type='font-awesome'
+               color='#5637DD'
+               raised
+               reverse
+               onPress={() => props.onShowModal()}
+            />
             {/* pencil icon end */}
         </Card>
       )
