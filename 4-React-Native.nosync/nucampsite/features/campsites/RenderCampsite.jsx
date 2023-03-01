@@ -29,6 +29,8 @@ const RenderCampsite = (props) => {
                reverse
               onPress={()=> props.isFavorite? console.log('Favorite campsite clicked') :props.markFavorite()}
             />
+
+            {/* pencil icon add */}
         </Card>
       )
       return <View/>
