@@ -1,4 +1,12 @@
-import { FlatList, StyleSheet, Text, View} from 'react-native';
+import { useState } from 'react';
+import {
+   FlatList,
+   StyleSheet,
+   Text,
+   Button,
+   Modal,
+   View
+} from 'react-native';
 import { COMMENTS } from '../shared/comments';
 import RenderCampsite from '../features/campsites/RenderCampsite'
 import { useSelector, useDispatch } from "react-redux";
