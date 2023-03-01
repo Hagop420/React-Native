@@ -5,9 +5,13 @@ import {
    Text,
    Modal,
    TouchableOpacity,
+   Button,
    View
 } from 'react-native';
-import { Rating } from 'react-native-elements';
+import { Input, Rating } from 'react-native-elements';
+import { postComment } from '../features/comments/commentsSlice';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import { COMMENTS } from '../shared/comments';
 import RenderCampsite from '../features/campsites/RenderCampsite'
 import { useSelector, useDispatch } from "react-redux";
@@ -47,6 +51,7 @@ const CampsiteInfoScreen = ({route}) => {
          text,
          campsiteId: campsite.id
        };
+      dispatch(postComment(newComment))
       console.log(newComment);
       setShowModal(!showModal)
    }
@@ -61,13 +66,34 @@ const CampsiteInfoScreen = ({route}) => {
    }
 
    const renderCommentsItem = ({item}) => {
+      // return (
+      //    <View style={styles.commentItem}>
+      //       {/* <Text style={{ fontSize: 14 }}>{item.text}</Text>
+      //       <Text style={{ fontSize: 12 }}>{item.rating} Stars</Text>
+      //       <Text style={{ fontSize: 12 }}>{`-- ${item.author}, (${item.date})`} Stars</Text> */}
+      //       <item.rating>
+      //       <Rating
+      //       readonly
+      //       startingValue={item.rating}
+      //       imageSize={12}
+      //       style={{ paddingVertical: 5 }}
+      //       />
+      //      </item.rating>
+      //    </View>
+      // )
+
       return (
          <View style={styles.commentItem}>
-            <Text style={{ fontSize: 14 }}>{item.text}</Text>
-            <Text style={{ fontSize: 12 }}>{item.rating} Stars</Text>
-            <Text style={{ fontSize: 12 }}>{`-- ${item.author}, (${item.date})`} Stars</Text>
+           <Text style={{ fontSize: 14 }}>{item.text}</Text>
+           <Rating
+             readonly
+             startingValue={item.rating}
+             imageSize={10}
+             style={{ paddingVertical: 5,alignItems:'flex-start', paddingVertical:'5%' }}
+           />
+           <Text style={{ fontSize: 12 }}>{`-- ${item.author}, (${item.date})`}</Text>
          </View>
-      )
+       )
    }
 
    return (
@@ -103,14 +129,78 @@ const CampsiteInfoScreen = ({route}) => {
          
          >
             <View style={styles.modal}>
-               <Rating>
+               <Rating
+                  showRating
+                  imageSize={40}
+                  readonly
+                  onFinishRating={(rating) => setRating(rating)} 
+                  startingValue={1}
+                  style={{ paddingVertical: 10 }}
+               
+               />
 
-               </Rating>
+               <Input
+                  placeholder='Author'
+                  leftIconContainerStyle={{paddingRight:10}}
+                  
+                  onChangeText={(rating) => setRating(rating)}
+                  leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                  
+                  
+               />
+                  
+               
+               
+               <Input
+                placeholder='Comment'
+                leftIcon={{type: 'font-awesome',name:'comment-o'}}
+                leftIconContainerStyle={{paddingRight:10}}
+                onChangeText={(rating) => setRating(rating)}
+               />
+               
+               <View
+                  style={{margin:10}}>
+                
+
+                  {/* touch submit */}
+                  <TouchableOpacity
+                      onPress={() => {
+                        handleSubmit();
+                        resetForm();
+                      }} >
+               
+                     <Text
+                        style=
+                        {{
+                           textAlign: 'center',
+                           padding: 10,
+                           margin:10,
+                           color: '#fff',
+                           fontWeight: 'bold',
+                           backgroundColor:'blue'}}
+                        onPress={() => {
+                           handleSubmit();
+                           resetForm();
+                        }}
+                      >Submit</Text>
+  
+                  </TouchableOpacity>
+                  {/* end */}
+
+               </View>
+                  
+                  
+                  
                <View style={{margin: 20}}>
                   <TouchableOpacity
                      onPress={() => setShowModal(!showModal)} >
                
-                        <Text style={styles.cancelButton}>Cancel</Text>
+                     <Text
+                        onPress={() => {
+                           handleSubmit();
+                           resetForm();
+                        }}
+                        style={styles.cancelButton}>Cancel</Text>
   
                   </TouchableOpacity>
                </View>
@@ -141,7 +231,8 @@ const styles = StyleSheet.create({
    },
    cancelButton: {
       textAlign:'center',
-      padding:10,
+      padding: 10,
+      width:'100%',
       color: '#fff',
       fontWeight:'bold',
       backgroundColor: "#808080",
