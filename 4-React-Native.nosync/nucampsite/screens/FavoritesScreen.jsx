@@ -28,7 +28,7 @@ const FavoritesScreen = ({ navigation }) => {
                </ListItem.Title>
 
                <ListItem.Subtitle>
-                  {campsite.describtion}
+                  {campsite.description}
                </ListItem.Subtitle>
             </ListItem.Content>
             

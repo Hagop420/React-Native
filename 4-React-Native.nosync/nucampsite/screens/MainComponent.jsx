@@ -3,6 +3,7 @@ import Constants from 'expo-constants';
 import CampsiteInfoScreen from './CampsiteInfoScreen';
 import DirectoryScreen from './DirectoryScreen';
 import { createStackNavigator } from '@react-navigation/stack';
+import FavoritesScreen from './FavoritesScreen';
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
@@ -126,6 +127,33 @@ const ResNavigator = () => {
         </Stack.Navigator>
     );
 };
+
+// favorites nacigator
+
+const favNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='Favorites'
+                component={FavoritesScreen}
+                options={({ navigation }) => ({
+                    title: 'Favorite Campsites',
+                    headerLeft: () => (
+                        <Icon
+                            name='heart'
+                            type='font-awesome'
+                            iconStyle={styles.stackIcon}
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    )
+                })}
+            />
+        </Stack.Navigator>
+    );
+};
+
+// end fav navigator
 
 const DirectoryNavigator = () => {
     const Stack = createStackNavigator();
@@ -283,6 +311,28 @@ const Main = () => {
     }}
 />
                 {/* end reservation navigar drawer */}
+
+
+                {/* Favorites */}
+
+                <Drawer.Screen
+    name='Favorites'
+    component={favNavigator}
+    options={{
+        title: 'Favorite Campsites',
+        drawerIcon: ({ color }) => (
+            <Icon
+                name='heart'
+                type='font-awesome'
+                size={24}
+                iconStyle={{ width: 24 }}
+                color={color}
+            />
+        )
+    }}
+                />
+                
+                {/* end favorites */}
             </Drawer.Navigator>
         </View>
     );
