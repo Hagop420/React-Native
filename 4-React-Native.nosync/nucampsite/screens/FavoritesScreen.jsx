@@ -7,8 +7,20 @@ import { baseUrl } from "../shared/baseUrl";
 
 
 const FavoritesScreen = ({ navigation }) => {
-   const {campsitesArray, isLoding, errMess} = useSelector((state) => state.campsites)
+   const { campsitesArray, isLoding, errMess } = useSelector((state) => state.campsites)
+   
    const favorites = useSelector((state) => state.favorites)
+
+   const renderFavItem = ({item:campsite}) => {
+      return (
+         <ListItem
+            
+         onPress={() => navigation.navigate()}>
+
+         </ListItem>
+      )
+      
+   }
 
 
    if (isLoding) {
@@ -26,7 +38,8 @@ const FavoritesScreen = ({ navigation }) => {
    return (
       <FlatList
          data={campsitesArray.filter((campsite) => favorites.includes(campsite.id))}
-         renderItem={renderFavItem} />
+         renderItem={renderFavItem}
+         keyExtractor={(item) => item.id.toString()} />
    )
 }
 
