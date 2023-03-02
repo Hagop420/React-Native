@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
-import { View, FlatList, Text } from 'react-native';
+import { View, FlatList, Text, TouchableOpacity } from 'react-native';
+import {SwipeRow} from 'react-native-swipe-list-view'
+import {toggleFavorite} from '../features/favorites/favoritesSlice'
 import { Avatar, ListItem } from 'react-native-elements';
 import Loading from '../components/LoadingComponent'
 import { baseUrl } from "../shared/baseUrl";
+import { useDispatch } from "react-redux";
 
 
 
@@ -11,9 +14,23 @@ const FavoritesScreen = ({ navigation }) => {
    
    const favorites = useSelector((state) => state.favorites)
 
+   const dispatch=useDispatch()
+
    const renderFavItem = ({item:campsite}) => {
       return (
-         <ListItem
+         <SwipeRow rightOpenValue={-100}>
+            <View style={StyleSheet.deleteView}>
+               <TouchableOpacity
+                  style={styles.deleteTouchable}
+                  onPress={() => dispatch(toggleFavorite(campsite.id))}>
+                  <Text style={styles.deleteText}>
+                     Delete
+                  </Text>
+
+               </TouchableOpacity>
+            </View>
+            <View>
+            <ListItem
             
             onPress={() => navigation.navigate('Directory', {
                screen: 'CampsiteInfo',
@@ -32,7 +49,10 @@ const FavoritesScreen = ({ navigation }) => {
                </ListItem.Subtitle>
             </ListItem.Content>
             
-         </ListItem>
+            </ListItem>
+            </View>
+         
+            </SwipeRow>
       )
       
    }
