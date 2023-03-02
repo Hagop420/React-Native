@@ -15,8 +15,23 @@ const FavoritesScreen = ({ navigation }) => {
       return (
          <ListItem
             
-         onPress={() => navigation.navigate()}>
+            onPress={() => navigation.navigate('Directory', {
+               screen: 'CampsiteInfo',
+               params: {campsite}
+            })}
+         >
+            <Avatar source={{ uri: baseUrl + campsite.image }} />
+            
+            <ListItem.Content>
+               <ListItem.Title>
+                  {campsite.name}
+               </ListItem.Title>
 
+               <ListItem.Subtitle>
+                  {campsite.describtion}
+               </ListItem.Subtitle>
+            </ListItem.Content>
+            
          </ListItem>
       )
       
