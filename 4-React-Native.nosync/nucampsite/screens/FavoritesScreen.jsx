@@ -13,6 +13,8 @@ import { Avatar, ListItem } from 'react-native-elements';
 import Loading from '../components/LoadingComponent'
 import { baseUrl } from "../shared/baseUrl";
 import { useDispatch } from "react-redux";
+import * as Animatable from 'react-native-animatable'
+
 
 
 
@@ -25,6 +27,7 @@ const FavoritesScreen = ({ navigation }) => {
 
    const renderFavItem = ({item:campsite}) => {
       return (
+         <Animatable.View animation={'fadeIn'} duration={500}>
          <SwipeRow rightOpenValue={-100}>
             <View style={styles.deleteView}>
                <TouchableOpacity
@@ -73,6 +76,7 @@ const FavoritesScreen = ({ navigation }) => {
             </View>
          
             </SwipeRow>
+            </Animatable.View>
       )
       
    }
@@ -91,10 +95,13 @@ const FavoritesScreen = ({ navigation }) => {
     )
    }
    return (
+      <Animatable.View animation={'fadeInRightBig'} duration={1500}>
+
       <FlatList
          data={campsitesArray.filter((campsite) => favorites.includes(campsite.id))}
          renderItem={renderFavItem}
          keyExtractor={(item) => item.id.toString()} />
+         </Animatable.View>
    )
 }
 

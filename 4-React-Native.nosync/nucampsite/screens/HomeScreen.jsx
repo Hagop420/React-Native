@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import Loading from "../components/LoadingComponent";
 import {useEffect, useRef} from 'react'
+import * as Animatable from 'react-native-animatable'
+
 
 
 

@@ -5,6 +5,7 @@ import { ScrollView } from "react-native-gesture-handler"
 import { useSelector } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import Loading from '../components/LoadingComponent'
+import * as Animatable from 'react-native-animatable'
 
 
 const Mission = () => {
@@ -27,6 +28,10 @@ const AboutScreen = () => {
    if (partners.isLoading) {
       return (
          <ScrollView>
+            <Animatable.View
+               animation={'fadeInDown'}
+               duration={1500}
+            delay={1300}>
             <Mission />
    
             <Card>
@@ -46,6 +51,7 @@ const AboutScreen = () => {
               
             
             </Card>
+            </Animatable.View>
          </ScrollView>
       )
    }
@@ -53,6 +59,7 @@ const AboutScreen = () => {
    if (partners.errMess) {
       return (
          <ScrollView>
+            
             <Mission />
    
             <Card>
@@ -72,7 +79,9 @@ const AboutScreen = () => {
               
             
             </Card>
+            
          </ScrollView>
+         
       )
    }
 
@@ -82,6 +91,10 @@ const AboutScreen = () => {
 
    return (
       <ScrollView>
+          <Animatable.View
+               animation={'fadeInDown'}
+               duration={1500}
+            delay={1300}>
          <Mission />
 
          <Card>
@@ -125,6 +138,7 @@ const AboutScreen = () => {
                )
             })}
          </Card>
+         </Animatable.View>
       </ScrollView>
    ); 
 };

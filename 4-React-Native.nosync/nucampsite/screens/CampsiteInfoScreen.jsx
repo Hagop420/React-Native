@@ -11,7 +11,7 @@ import {
 import { Input, Rating } from 'react-native-elements';
 import { postComment } from '../features/comments/commentsSlice';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import * as Animatable from 'react-native-animatable'
 import { COMMENTS } from '../shared/comments';
 import RenderCampsite from '../features/campsites/RenderCampsite'
 import { useSelector, useDispatch } from "react-redux";
@@ -98,6 +98,10 @@ const CampsiteInfoScreen = ({route}) => {
 
    return (
       <>
+          <Animatable.View
+               animation={'fadeInUp'}
+               duration={1500}
+            delay={1300}>
          <FlatList
             data={comms.commentsArray.filter((comm) => 
               comm.campsiteId===campsite.id
@@ -206,6 +210,7 @@ const CampsiteInfoScreen = ({route}) => {
                </View>
             </View>
          </Modal>
+         </Animatable.View>
       </>
    )
 }

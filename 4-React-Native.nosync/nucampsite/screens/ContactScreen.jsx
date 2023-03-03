@@ -1,8 +1,14 @@
 import { Card,Text } from "react-native-elements"
 import { ScrollView } from "react-native-gesture-handler"
+import * as Animatable from 'react-native-animatable'
+
 
 const ContactScreen = () => {
    return(
+      <Animatable.View
+      animation={'fadeInUp'}
+      duration={1000}
+   delay={500}>
    <ScrollView>
       <Card
       wrapperStyle={{margin: 10}}>
@@ -29,7 +35,9 @@ const ContactScreen = () => {
             Email: campsites@nucamp.co
          </Text>
       </Card>
+      
       </ScrollView>
+      </Animatable.View>
    )
 }
 
