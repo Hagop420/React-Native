@@ -2,17 +2,23 @@ import { StyleSheet, Alert, PanResponder, Text, View, Button } from "react-nativ
 import { Card, Icon } from "react-native-elements";
 import { baseUrl } from "../../shared/baseUrl";
 import * as Animatable from 'react-native-animatable'
-
+import { useRef } from "react";
 
 
 const RenderCampsite = (props) => {
 
    const {campsite} = props
    const isLeftSwipe = ({dx}) => dx < -200
-   
+   const view=useRef()
 
    const PanHandlerResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+         view.current
+            .pulse(1000)
+            .then((endSt) => console.log(endSt.finished ? 'finished' : 'canceled')
+            )
+      },
       onPanResponderEnd: (e, gState) => {
          console.log('Pan responder end:', gState);
 
@@ -20,7 +26,7 @@ const RenderCampsite = (props) => {
          
          if (isLeftSwipe(gState)) {
             Alert.alert(
-               'Add F avorite',
+               'Add to Favorites',
                'Are you sure you wish to add ' +
                campsite.name +
                ' to favorites?',
@@ -46,6 +52,7 @@ const RenderCampsite = (props) => {
          <Animatable.View
             animation={'fadeInDownBig'}
             duration={900}
+         ref={view}
             {...PanHandlerResponder.panHandlers}
             delay={900}>
          <Card containerStyle={ styles.cardContain }>
