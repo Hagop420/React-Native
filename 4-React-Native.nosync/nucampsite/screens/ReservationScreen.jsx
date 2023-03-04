@@ -7,7 +7,9 @@ import {
    Switch,
    Button,
    Modal,
-   Platform
+   Platform,
+   PanResponder,
+   Alert
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -34,6 +36,26 @@ const ReservationScreen = () => {
       setShowModal(!showModal)
    }
 
+   const alertSt = () => {
+      Alert.alert(
+         'Begin Search?',
+         `Number of campsites: ${campers} \n Hike in?: ${hikeIn} \n Date: ${new Date().toLocaleDateString()}`,
+         [
+            {
+               text: 'Cancel',
+               style: 'cancel',
+               onPress:()=> console.log('Cancel Pressed')
+            },
+            {
+               text: 'Ok',
+               onPress:()=> console.log('yay')
+            }
+            
+         ],
+         {cancelable:false}
+      )
+   }
+
    const reset = () => {
       setCampers(1)
       setHikeIn(false)
@@ -43,6 +65,11 @@ const ReservationScreen = () => {
 
    return (
       <ScrollView>
+         <Animatable.View
+            animation='zoomIn'
+            duration={2000}
+            delay={1000}>
+         
          <View style={styles.formRow}>
             <Text style={styles.formLabel}>
                Number of Campers:
@@ -109,7 +136,7 @@ const ReservationScreen = () => {
                backgroundColor:'blue',
                margin: 20}}>
             <Button
-               onPress={() => handleRes()}
+               onPress={() => alertSt()}
                title='Search'
                color='#fff'
                accessibilityLabel="Tap me to select a reservation date'"
@@ -120,7 +147,8 @@ const ReservationScreen = () => {
             transparent={false}
             visible={showModal}
             onRequestClose={() => setShowModal(!showModal)}
->
+            >
+           
             <View
                style=
                {{
@@ -155,8 +183,9 @@ const ReservationScreen = () => {
             
             </View>
             </Modal>
-        
+        </Animatable.View>
       </ScrollView>
+      
    )
 }
 

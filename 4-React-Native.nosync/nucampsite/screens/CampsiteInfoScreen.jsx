@@ -101,7 +101,7 @@ const CampsiteInfoScreen = ({route}) => {
           <Animatable.View
                animation={'fadeInUp'}
                duration={1500}
-            delay={1300}>
+               delay={1300}>
          <FlatList
             data={comms.commentsArray.filter((comm) => 
               comm.campsiteId===campsite.id

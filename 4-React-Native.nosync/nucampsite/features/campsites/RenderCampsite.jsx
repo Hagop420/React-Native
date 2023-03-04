@@ -7,9 +7,12 @@ import { useRef } from "react";
 
 const RenderCampsite = (props) => {
 
+
    const {campsite} = props
    const isLeftSwipe = ({dx}) => dx < -200
    const view=useRef()
+   const isRightSwipe = ({dx}) => dx < 200
+
 
    const PanHandlerResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
