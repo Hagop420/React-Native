@@ -20,9 +20,10 @@ const RenderCampsite = (props) => {
          
          if (isLeftSwipe(gState)) {
             Alert.alert(
-               'Add to Favorites',
-               `Are you sure you wish to add ' +
-               campsite.name`
+               'Add F avorite',
+               'Are you sure you wish to add ' +
+               campsite.name +
+               ' to favorites?',
                [
                   {
                      text: 'Cancel',
