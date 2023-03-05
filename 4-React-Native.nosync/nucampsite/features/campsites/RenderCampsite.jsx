@@ -181,7 +181,7 @@ const RenderCampsite = (props) => {
                
                      <Text
                         onPress={() => {
-                           // handleSubmit();
+                           handleSubmit();
                            resetForm();
                         }}
                         style={styles.cancelButton}>Cancel</Text>
@@ -239,6 +239,13 @@ const styles = StyleSheet.create({
    modalButtons: {
      margin: 10,
    },
+   cancelButton: {
+      textAlign:'center',
+      backgroundColor: 'red',
+      padding: 10,
+      color: '#000',
+      fontWeight:'bold'
+   }
  });
  
 //  const styles = StyleSheet.create({
