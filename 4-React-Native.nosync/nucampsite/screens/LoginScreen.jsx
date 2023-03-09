@@ -12,62 +12,74 @@ const LoginScreen = () => {
 
    // remember info
    useEffect(() => {
-   
+      SecureStore.getItemAsync('userinfo').then((userDta) => {
+         const userinfo = JSON.parse(userDta)
+       
+         if (userinfo) {
+            setUserName(userinfo.userName)
+            setPassword(userinfo.password)
+            setRememberMe(true)
+         }
+      })
    }, [])
+
+   // remember info end
 
    const handleLogin = () => {
       console.log(`username: ${userName}`);
       console.log(`password: ${password}`);
       console.log(`Remember_Me: ${rememberMe}`);
 
-      if (rememberMe.checked) {
+      if (rememberMe) {
          SecureStore.setItemAsync(
-            'userInfo',
-            Json.stringify({
+            'userinfo',
+            JSON.stringify({
                userName,
                password
             })
          ).catch((err) => console.log(`Could not save ${err}`))
          
       } else {
-         SecureStore.deleteItemAsync('userInfo').catch((err) => {
+         SecureStore.deleteItemAsync('userinfo').catch((err) => {
             console.log(`Could not save ${err}`);
          })
       }
    }
 
    return (
-      <View style={StyleSheet.container}>
+      <View style={styles
+         .container}>
          <Input
             placeholder='username'
             leftIcon={{ type: 'font-awesome', name: 'user' }}
-            onChangeText={((txt) => setUserName(txt))}
-            value={username}
+            onChangeText={(txt) => setUserName(txt)}
+            value={userName}
             containerStyle={StyleSheet.formInput}
             leftIconContainerStyle={styles.formIcon}
             />
          <Input
             placeholder='Password'
             leftIcon={{ type: 'font-awesome', name: 'key' }}
-            onChangeText={((txt) => setPassword(txt))}
+            onChangeText={(txt) => setPassword(txt)}
             value={password}
             containerStyle={StyleSheet.formInput}
             leftIconContainerStyle={styles.formIcon}
          />
          
          {/* Rember me checkbox */}
-         <Checkbox
-            title='Remember My info'
+         <CheckBox
+            title='Remember Me'
             center
+            checked={rememberMe}
             onPress={()=> setRememberMe(!rememberMe)}
-            containerStyle={style.formCheckbox}
+            containerStyle={styles.formCheckbox}
          />
          {/* Login button */}
-         <View style={styles.formButton}>
+         <View style={styles.formLoginButton}>
             <Button
                onPress={() => handleLogin()}
                title='Login'
-               color='lime'
+               color='#fff'
             />
          </View>
       </View>
@@ -97,7 +109,9 @@ const styles = StyleSheet.create({
        margin: 10,
        backgroundColor: null
    },
-   formButton: {
+   formLoginButton: {
+      fontWeight:'bold',
+      backgroundColor:'green',
        margin: 40
    }
 });
