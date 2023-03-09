@@ -186,6 +186,7 @@ const ReservationScreen = () => {
         </Animatable.View>
       </ScrollView>
       
+      // notifications here
    )
 }
 
