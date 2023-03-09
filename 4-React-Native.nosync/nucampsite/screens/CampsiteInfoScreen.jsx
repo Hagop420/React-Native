@@ -5,7 +5,6 @@ import {
    Text,
    Modal,
    TouchableOpacity,
-   
    View
 } from 'react-native';
 import { Input, Rating } from 'react-native-elements';
