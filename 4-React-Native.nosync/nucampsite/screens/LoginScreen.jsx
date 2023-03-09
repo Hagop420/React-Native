@@ -46,7 +46,11 @@ const LoginScreen = () => {
          />
          {/* Login button */}
          <View style={styles.formButton}>
-
+            <Button
+               onPress={() => handleLogin()}
+               title='Login'
+               color='lime'
+            />
          </View>
       </View>
    )
@@ -56,5 +60,29 @@ const LoginScreen = () => {
 
 
 }
+
+
+// css styling
+
+const styles = StyleSheet.create({
+   container: {
+       justifyContent: 'center',
+       margin: 20
+   },
+   formIcon: {
+       marginRight: 10
+   },
+   formInput: {
+       padding: 10
+   },
+   formCheckbox: {
+       margin: 10,
+       backgroundColor: null
+   },
+   formButton: {
+       margin: 40
+   }
+});
+
 
 export default LoginScreen
