@@ -10,12 +10,30 @@ const LoginScreen = () => {
    const [password, setPassword] = useState('')
    const [rememberMe, setRememberMe] = useState(false)
 
-
+   // remember info
+   useEffect(() => {
+   
+   }, [])
 
    const handleLogin = () => {
       console.log(`username: ${userName}`);
       console.log(`password: ${password}`);
       console.log(`Remember_Me: ${rememberMe}`);
+
+      if (rememberMe.checked) {
+         SecureStore.setItemAsync(
+            'userInfo',
+            Json.stringify({
+               userName,
+               password
+            })
+         ).catch((err) => console.log(`Could not save ${err}`))
+         
+      } else {
+         SecureStore.deleteItemAsync('userInfo').catch((err) => {
+            console.log(`Could not save ${err}`);
+         })
+      }
    }
 
    return (
