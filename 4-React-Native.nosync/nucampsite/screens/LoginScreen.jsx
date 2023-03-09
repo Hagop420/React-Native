@@ -37,7 +37,7 @@ const LoginScreen = () => {
             leftIconContainerStyle={styles.formIcon}
          />
          
-         {/*  */}
+         {/* Rember me checkbox */}
       </View>
    )
 
