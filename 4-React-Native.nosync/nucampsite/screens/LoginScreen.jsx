@@ -42,7 +42,12 @@ const LoginScreen = () => {
             title='Remember My info'
             center
             onPress={()=> setRememberMe(!rememberMe)}
+            containerStyle={style.formCheckbox}
          />
+         {/* Login button */}
+         <View style={styles.formButton}>
+
+         </View>
       </View>
    )
 
