@@ -38,6 +38,8 @@ const LoginScreen = () => {
          />
          
          {/* Rember me checkbox */}
+         <Checkbox
+         title/>
       </View>
    )
 
