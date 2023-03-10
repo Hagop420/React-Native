@@ -14,6 +14,7 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker'
 import * as Animatable from 'react-native-animatable'
+import * as Notifications from 'expo-notifications'
 
 
 const ReservationScreen = () => {
@@ -30,9 +31,9 @@ const ReservationScreen = () => {
    }
 
    const handleRes = () => {
-      console.log('campers:' , campers);
-      console.log('hikeIn:' , hikeIn);
-      console.log('date:' , date);
+      console.log('campers:', campers);
+      console.log('hikeIn:', hikeIn);
+      console.log('date:', date);
       setShowModal(!showModal)
    }
 
@@ -44,15 +45,20 @@ const ReservationScreen = () => {
             {
                text: 'Cancel',
                style: 'cancel',
-               onPress:()=> console.log('Cancel Pressed')
+               onPress: () => console.log('Cancel Pressed')
             },
             {
                text: 'Ok',
-               onPress:()=> console.log('yay')
+               onPress: () => {
+                  console.log('yay')
+                  reset()
+                  presentLocNotification(date.toLocaleDateString('en-US'))
+               }
+
             }
             
          ],
-         {cancelable:false}
+         { cancelable: false }
       )
    }
 
@@ -62,6 +68,44 @@ const ReservationScreen = () => {
       setDate(new Date())
       setShowCal(false)
    }
+
+
+   // notfication function
+
+   const presentLocNotification = async (resDate) => {
+      const sendNot = () => {
+         Notifications.setNotificationHandler({
+            handleNotification: async () => ({
+               shouldPlaySound: true,
+               shouldSetBadge: true
+            })
+         });
+    
+    
+         Notifications.scheduleNotificationAsync({
+            content: {
+               title: 'Your search result',
+               body: `Search for: ${resDate}`
+            },
+            trigger: null
+         });
+      }
+
+         // check if we have permission from the divice
+         let permission = await Notifications.getPermissionsAsync()
+
+      // check if is 
+
+      if (!permission.granted) {
+         permission=await Notifications.requestPermissionsAsync()
+      }
+      if (permission.granted) {
+         sendNot()
+      }
+
+
+   }
+   
 
    return (
       <ScrollView>
