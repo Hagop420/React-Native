@@ -1,9 +1,17 @@
-import { Card,Text } from "react-native-elements"
+import { Card,Text, button, Icon, Button } from "react-native-elements"
+import * as MailComposer from 'expo-mail-composer'
 import { ScrollView } from "react-native-gesture-handler"
 import * as Animatable from 'react-native-animatable'
 
 
 const ContactScreen = () => {
+   const sendMail = () => {
+      MailComposer.composeAsync({
+         recipients: ['campsites@nucamp.co'],
+         subject: 'Inquiry',
+         body:'To who it may concern'
+      })
+   }
    return(
       <Animatable.View
       animation={'fadeInUp'}
@@ -33,7 +41,23 @@ const ContactScreen = () => {
 
          <Text>
             Email: campsites@nucamp.co
-         </Text>
+               </Text>
+               <Button
+                  title='Send Email'
+                  buttonStyle={{ backgroundColor: 'blue', margin: 40, borderRadius:5, 
+                  }}
+                  
+                  icon={
+                     <Icon
+                        name='envelope'
+                        type='font-awesome'
+                        color='#fff'
+                        iconStyle={{marginRight:10}}
+                     />
+                     
+                  }
+                  onPress={() => sendMail()}
+              />
       </Card>
       
       </ScrollView>
