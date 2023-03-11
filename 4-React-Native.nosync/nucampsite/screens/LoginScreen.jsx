@@ -12,7 +12,8 @@ import {
    CheckBox,
    Button,
    Input,
-   Icon
+   Icon,
+   ImageManipulator
 } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
@@ -186,12 +187,25 @@ const handleRegister = () => {
          
          if (!capturedImage.cancelled) {
             console.log(capturedImage);
-            setImageUrl(capturedImage.uri);
+            processImage(capturedImage.uri);
 
         }
       }
 
-}
+   }
+
+   
+   const processImage = async (imgUri) => {
+      const processedImage = await ImageManipulator.manipulateAsync(
+        imgUri,
+        [{ resize: { width: 400 } }],
+        { format: 'png' }
+      );
+      setImageUrl(processedImage.uri);
+    };
+    
+   
+
 
 
    return (
