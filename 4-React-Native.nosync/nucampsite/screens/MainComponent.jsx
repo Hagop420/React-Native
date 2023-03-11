@@ -1,4 +1,4 @@
-import { Image, Platform, StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, View, Aelrt, ToastAndroid, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import CampsiteInfoScreen from './CampsiteInfoScreen';
 import DirectoryScreen from './DirectoryScreen';
@@ -22,6 +22,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import LoginScreen from './LoginScreen';
 import { fetchPromotions } from '../features/promotions/promotionsSlice';
 import { fetchComments } from '../features/comments/commentsSlice';
+import NetInfo from '@react-native-community/netinfo'
 import ReservationScreen from './ReservationScreen';
 import * as Animatable from 'react-native-animatable'
 
@@ -245,6 +246,45 @@ const Main = () => {
         dispatch(fetchPartners())
         dispatch(fetchComments())
     }, [dispatch])
+
+
+
+    useEffect(() => {
+       //network 
+       NetInfo.fetch().then((connectInfo) => {
+           Platform.OS === 'ios'
+               ? Alert.alert(`Network Connectivity type: ${connectInfo.type}`) : ToastAndroid.show(
+                `Network Connectivity type: ${connectInfo.type} ${ToastAndroid.LONG}`
+               )
+       })
+        // subscribe to net chges
+
+        const unSubNetInfo = NetInfo.addEventListener(
+            (connectInfo) => {
+                handleConnectChg(connectInfo)
+                }
+        )
+        return unSubNetInfo
+    }, [])
+
+    const handleConnectChg = (connectionInfo) => {
+        let connInfo = `You are now connected to an active network`
+        
+        switch (connectionInfo.type) {
+            case 'none':
+                connInfo = 'No network connection is active.';
+                break;
+            case 'unknown':
+                connInfo = 'The network connection state is now unknown.';
+                break;
+            case 'cellular':
+                connInfo = 'You are now connected to a cellular network.';
+                break;
+            case 'wifi':
+                connInfo = 'You are now connected to a WiFi network.';
+                break;
+        }
+        }
 
     return (
         <View
