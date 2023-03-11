@@ -1,4 +1,4 @@
-import { StyleSheet, Alert, Modal, PanResponder, TouchableOpacity, Text, View, Button } from "react-native";
+import { StyleSheet, Share, Alert, Modal, PanResponder, TouchableOpacity, Text, View, Button } from "react-native";
 import { Card, Input, Icon, Rating } from "react-native-elements";
 import { baseUrl } from "../../shared/baseUrl";
 import * as Animatable from 'react-native-animatable'
@@ -61,6 +61,20 @@ const RenderCampsite = (props) => {
    }
    // const dispatch=useDispatch()
 
+   // sharing with other platforms
+
+   const sharingCampsite = (ttl, msg, url) => {
+      Share.share({
+         // not compatible with IOS
+         // title,
+         message: `${ttl}: ${msg} ${url}`,
+         url
+      },
+         {
+         dialogTitle:`Share: ${ttl}`
+      })
+   }
+
    if (campsite) {
 
       return (
@@ -98,6 +112,18 @@ const RenderCampsite = (props) => {
                raised
                reverse
                onPress={() => props.onShowModal()}
+               />
+            <Icon
+               name='share'
+               type='font-awesome'
+               color='#5637DD'
+               raised
+               reverse
+                     onPress={() => sharingCampsite(
+                        campsite.name,
+                        campsite.description,
+                        baseUrl + campsite.image
+               )}
                />
                
                </View>
