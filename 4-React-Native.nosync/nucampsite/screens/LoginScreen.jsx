@@ -174,15 +174,17 @@ const handleRegister = () => {
    const getImageFromCamera = async () => {
       const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
 
-      if (cameraPermission.status === 'granted') {
+      if (cameraPermission.status === 'granted'
+     ) {
          const capturedImage = await ImagePicker.launchCameraAsync({
             allowsEditing: true,
             aspect: [1, 1]
          });      
          
-         if (capturedImage.assets) {
-            console.log(capturedImage.assets[0]);
-            setImageUrl(capturedImage.assets[0].uri);
+         if (!capturedImage.cancelled) {
+            console.log(capturedImage);
+            setImageUrl(capturedImage.uri);
+
         }
       }
 
