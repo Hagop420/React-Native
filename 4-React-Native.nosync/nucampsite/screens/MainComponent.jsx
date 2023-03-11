@@ -284,6 +284,13 @@ const Main = () => {
                 connInfo = 'You are now connected to a WiFi network.';
                 break;
         }
+
+        if (Platform.OS === 'ios') {
+            Alert.alert('Connection change:', connInfo);
+          } else {
+            ToastAndroid.show(connInfo, ToastAndroid.LONG);
+          }
+          
         }
 
     return (
