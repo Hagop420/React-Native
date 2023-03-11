@@ -5,7 +5,8 @@ import {
 import {
    View,
    StyleSheet,
-   ScrollView
+   ScrollView,
+   Image
 } from 'react-native';
 import {
    CheckBox,
@@ -15,7 +16,9 @@ import {
 } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-
+import { baseUrl } from '../shared/baseUrl';
+import * as ImagePicker from 'expo-image-picker'
+import logo from '../assets/images/logo.png'
 
 
 const LoginTabs = ({navigation}) => {
@@ -137,6 +140,7 @@ const [lastName, setLastName] = useState('');
 const [email, setEmail] = useState('');
 const [rememberMe, setRememberMe] = useState(false);
 
+const [imageUrl, setImageUrl] = useState(baseUrl + 'images/logo.png')
 // remember me code 
 
 const handleRegister = () => {
@@ -155,7 +159,7 @@ const handleRegister = () => {
       SecureStore.setItemAsync(
          'userinfo',
          JSON.stringify({
-            userName,
+            username,
             password
          })
       ).catch((err) => console.log(`Could not save ${err}`))
@@ -166,8 +170,113 @@ const handleRegister = () => {
       })
    }
 }
+   
+   const getImageFromCamera = async () => {
+      const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
 
-   return <ScrollView></ScrollView>
+      if (cameraPermission.status === 'granted') {
+         const capturedImage = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [1, 1]
+         });
+         
+         if (capturedImage.assets) {
+            console.log(capturedImage.assets[0]);
+            setImageUrl(capturedImage.assets[0].uri);
+        }
+      }
+
+}
+
+
+   return (
+      <>
+         <ScrollView>
+
+      <View style={styles
+         .container}>
+               <View style={styles.imageContainer}>
+                  <Image
+                     source={{ uri: imageUrl }}
+                     loadingIndicatorSource={logo}
+                     style={styles.image}
+                  />
+
+                  <Button
+                     title='Camera'
+                     onPress={getImageFromCamera}
+                  />
+               </View>
+         <Input
+            placeholder='username'
+            leftIcon={{ type: 'font-awesome', name: 'user' }}
+            onChangeText={(txt) => setUserName(txt)}
+            value={username}
+            containerStyle={styles.formInput}
+            leftIconContainerStyle={styles.formIcon}
+            />
+            <Input
+               placeholder='First Name'
+               leftIcon={{ type: 'font-awesome', name: 'user' }}
+               onChangeText={(txt) => setFirstName(txt)}
+               value={firstName}
+               containerStyle={styles.formInput}
+               leftIconContainerStyle={styles.formIcon}
+            />
+         <Input
+            placeholder='Last Name'
+            leftIcon={{ type: 'font-awesome', name: 'user' }}
+            onChangeText={(txt) => setLastName(txt)}
+            value={lastName}
+            containerStyle={styles.formInput}
+            leftIconContainerStyle={styles.formIcon}
+         />
+         <Input
+            placeholder='Email'
+            leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+            onChangeText={(txt) => setEmail(txt)}
+            value={email}
+            containerStyle={styles.formInput}
+            leftIconContainerStyle={styles.formIcon}
+         />
+         <Input
+            placeholder='Password'
+            leftIcon={{ type: 'font-awesome', name: 'key' }}
+            onChangeText={(txt) => setPassword(txt)}
+            value={password}
+            containerStyle={styles.formInput}
+            leftIconContainerStyle={styles.formIcon}
+         />
+         
+         {/* Rember me checkbox */}
+         <CheckBox
+            title='Remember Me'
+            center
+            checked={rememberMe}
+            onPress={()=> setRememberMe(!rememberMe)}
+            containerStyle={styles.formCheckbox}
+         />
+         {/* Login button */}
+         <View style={styles.formLoginButton}>
+            <Button
+               onPress={() => handleRegister()}
+               title='Register'
+               color='#fff'
+               icon={
+                  <Icon
+                     name='user-plus'
+                     type='font-awesome'
+                     color='#fff'
+                     iconStyle={{marginRight:10}} />
+                  }
+                  buttonStyle={{backgroundColor:'blue'}}
+                  />
+
+         </View>
+      </View>
+         </ScrollView>
+      </>
+      )
    
    
 }
@@ -228,14 +337,15 @@ const LoginScreen = () => {
 
 const styles = StyleSheet.create({
    container: {
-       justifyContent: 'center',
-       margin: 20
-   },
+      justifyContent: 'center',
+      margin: 10
+  },
    formIcon: {
        marginRight: 10
    },
    formInput: {
-       padding: 10
+      padding: 8,
+      height:60
    },
    formCheckbox: {
        margin: 10,
@@ -244,8 +354,21 @@ const styles = StyleSheet.create({
    formLoginButton: {
       fontWeight:'bold',
       backgroundColor:'black',
-       margin: 40
+      margin: 20,
+      marginRight: 40,
+      marginLeft:40
    },
+   imageContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      margin: 10
+  },
+  image: {
+      width: 60,
+      height: 60
+  }
   
 });
 
