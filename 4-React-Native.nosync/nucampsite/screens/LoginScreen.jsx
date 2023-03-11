@@ -173,9 +173,12 @@ const handleRegister = () => {
    
    const getImageFromCamera = async () => {
       const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
-
-      if (cameraPermission.status === 'granted'
-     ) {
+      // if u have no permission from settings
+      if (cameraPermission.status === 'denied') {
+   console.log('YOU DO NOT HAVE PERMISSION TO OPEN CAMERA FOR THIS APPLICATION');
+}
+      if (cameraPermission.status === 'granted') {
+      console.log('PERMISSION GRANTED');
          const capturedImage = await ImagePicker.launchCameraAsync({
             allowsEditing: true,
             aspect: [1, 1]
