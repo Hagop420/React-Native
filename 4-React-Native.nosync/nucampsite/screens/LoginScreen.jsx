@@ -178,7 +178,7 @@ const handleRegister = () => {
          const capturedImage = await ImagePicker.launchCameraAsync({
             allowsEditing: true,
             aspect: [1, 1]
-         });
+         });      
          
          if (capturedImage.assets) {
             console.log(capturedImage.assets[0]);
