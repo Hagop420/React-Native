@@ -1,11 +1,24 @@
-import { useEffect, useState } from 'react';
-import { View, Button, StyleSheet } from 'react-native';
-import { CheckBox, Input } from 'react-native-elements';
+import {
+   useEffect,
+   useState
+} from 'react';
+import {
+   View,
+   StyleSheet,
+   ScrollView
+} from 'react-native';
+import {
+   CheckBox,
+   Button,
+   Input,
+   Icon
+} from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 
 
 
-const LoginScreen = () => {
+const LoginTabs = ({navigation}) => {
    const [userName, setUserName] = useState('')
    const [password, setPassword] = useState('')
    const [rememberMe, setRememberMe] = useState(false)
@@ -54,7 +67,7 @@ const LoginScreen = () => {
             leftIcon={{ type: 'font-awesome', name: 'user' }}
             onChangeText={(txt) => setUserName(txt)}
             value={userName}
-            containerStyle={StyleSheet.formInput}
+            containerStyle={styles.formInput}
             leftIconContainerStyle={styles.formIcon}
             />
          <Input
@@ -62,7 +75,7 @@ const LoginScreen = () => {
             leftIcon={{ type: 'font-awesome', name: 'key' }}
             onChangeText={(txt) => setPassword(txt)}
             value={password}
-            containerStyle={StyleSheet.formInput}
+            containerStyle={styles.formInput}
             leftIconContainerStyle={styles.formIcon}
          />
          
@@ -80,6 +93,30 @@ const LoginScreen = () => {
                onPress={() => handleLogin()}
                title='Login'
                color='#fff'
+               icon={
+                  <Icon
+                     name='sign-in'
+                     type='font-awesome'
+                     color='#fff'
+                     iconStyle={{marginRight:10}} />
+                  }
+                  buttonStyle={{backgroundColor:'blue'}}
+                  />
+
+         </View>
+         <View style={styles.formLoginButton}>
+            <Button
+               onPress={() => navigation.navigate('Register')}
+               title='Register'
+               type='#000'
+               icon={
+                  <Icon
+                     name='user-plus'
+                     type='font-awesome'
+                     color='yellow'
+                     iconStyle={{marginRight:10}} />
+               }
+               titleStyle={{color:'yellow'}}
             />
          </View>
       </View>
@@ -89,6 +126,63 @@ const LoginScreen = () => {
 
 
 
+}
+
+const RegTab = () => {
+   return <ScrollView></ScrollView>
+   
+   
+}
+
+const Tab = createBottomTabNavigator()
+
+const LoginScreen = () => {
+   const tabBarOpt = {
+      activeBackgroundColor: '#000',
+      inactiveBackgroundColor: '#ddd',
+      activeTintColor:'yellow',
+      inactiveTintColor: '#808080',
+      labelStyle:{fontSize:16}
+   }
+
+
+   return (
+      <Tab.Navigator
+         tabBarOptions={tabBarOpt}>
+         <Tab.Screen
+            name='Login'
+            component={LoginTabs}
+            options={{
+               tabBarIcon: (props) => {
+                  return (
+                     <Icon
+                        name='sign-in'
+                        type='font-awesome'
+                        color={props.color}
+                     />
+                  )
+               }
+            }}
+         />
+
+         <Tab.Screen
+            name='Register'
+            component={RegTab}
+            options={{
+               tabBarIcon: (props) => {
+                  return (
+                     <Icon
+                        name='user-plus'
+                        type='font-awesome'
+                        color={props.color}
+                     />
+                  )
+               }
+            }}
+         />
+         </Tab.Navigator>
+
+   )
 }
 
 
@@ -111,10 +205,11 @@ const styles = StyleSheet.create({
    },
    formLoginButton: {
       fontWeight:'bold',
-      backgroundColor:'green',
+      backgroundColor:'black',
        margin: 40
-   }
+   },
+  
 });
 
 
-export default LoginScreen
+export default LoginScreen;
