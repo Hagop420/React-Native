@@ -23,6 +23,7 @@ const LoginTabs = ({navigation}) => {
    const [password, setPassword] = useState('')
    const [rememberMe, setRememberMe] = useState(false)
 
+
    // remember info
    useEffect(() => {
       SecureStore.getItemAsync('userinfo').then((userDta) => {
@@ -129,6 +130,43 @@ const LoginTabs = ({navigation}) => {
 }
 
 const RegTab = () => {
+const [username, setUserName] = useState('');
+const [password, setPassword] = useState('');
+const [firstName, setFirstName] = useState('');
+const [lastName, setLastName] = useState('');
+const [email, setEmail] = useState('');
+const [rememberMe, setRememberMe] = useState(false);
+
+// remember me code 
+
+const handleRegister = () => {
+   const userIn = {
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+      rememberMe
+   }
+   
+   console.log(JSON.stringify(userIn));
+
+   if (rememberMe) {
+      SecureStore.setItemAsync(
+         'userinfo',
+         JSON.stringify({
+            userName,
+            password
+         })
+      ).catch((err) => console.log(`Could not save ${err}`))
+      
+   } else {
+      SecureStore.deleteItemAsync('userinfo').catch((err) => {
+         console.log(`Could not save ${err}`);
+      })
+   }
+}
+
    return <ScrollView></ScrollView>
    
    
