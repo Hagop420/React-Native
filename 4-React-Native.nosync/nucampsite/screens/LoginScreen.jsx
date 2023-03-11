@@ -12,14 +12,15 @@ import {
    CheckBox,
    Button,
    Input,
-   Icon,
-   ImageManipulator
+   Icon
 } from 'react-native-elements';
+import * as ImageManipulator from 'expo-image-manipulator';
 import * as SecureStore from 'expo-secure-store';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import { baseUrl } from '../shared/baseUrl';
 import * as ImagePicker from 'expo-image-picker'
 import logo from '../assets/images/logo.png'
+import { SaveFormat } from 'expo-image-manipulator';
 
 
 const LoginTabs = ({navigation}) => {
@@ -171,6 +172,22 @@ const handleRegister = () => {
       })
    }
 }
+   const getImageFromGallery = async () => {
+      const mediaLibraryPermissions = await ImagePicker.requestCameraPermissionsAsync();
+
+      if (mediaLibraryPermissions.status === 'granted') {
+         const GLRY = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [1, 1]
+         }); 
+         // const capturedImage = await  ImagePicker.launchImageLibraryAsync()
+         if (!GLRY.cancelled) {
+            console.log(GLRY);
+            processImage(GLRY.uri);
+               
+           }
+      }
+   }
    
    const getImageFromCamera = async () => {
       const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
@@ -180,15 +197,15 @@ const handleRegister = () => {
 }
       if (cameraPermission.status === 'granted') {
       console.log('PERMISSION GRANTED');
-         const capturedImage = await ImagePicker.launchCameraAsync({
-            allowsEditing: true,
-            aspect: [1, 1]
-         });      
-         
-         if (!capturedImage.cancelled) {
-            console.log(capturedImage);
-            processImage(capturedImage.uri);
-
+      const capturedImage = await ImagePicker.launchCameraAsync({
+         allowsEditing: true,
+         aspect: [1, 1]
+      });      
+      
+      if (!capturedImage.cancelled) {
+         console.log(capturedImage);
+         processImage(capturedImage.uri);
+            
         }
       }
 
@@ -199,10 +216,14 @@ const handleRegister = () => {
       const processedImage = await ImageManipulator.manipulateAsync(
         imgUri,
         [{ resize: { width: 400 } }],
-        { format: 'png' }
+        { format: ImageManipulator.SaveFormat.PNG }
       );
+     console.log(processedImage);
       setImageUrl(processedImage.uri);
     };
+
+    
+    
     
    
 
@@ -224,6 +245,11 @@ const handleRegister = () => {
                   <Button
                      title='Camera'
                      onPress={getImageFromCamera}
+                  />
+
+                  <Button
+                     title='Gallery'
+                     onPress={getImageFromGallery}
                   />
                </View>
          <Input
